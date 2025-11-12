@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrek Systems - Waste Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            border-bottom: 3px solid #2e7d32;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #2e7d32;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 15px;
+            padding: 8px 0;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a.active {
+            color: #2e7d32;
+            border-bottom-color: #2e7d32;
+        }
+
+        .nav-menu a:hover {
+            color: #2e7d32;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-actions button {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .user-actions button:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        .content-left {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .page-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Dashboard Section */
+        .dashboard-section {
+            background: #fafafa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-title {
+            font-size: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: white;
+            border: 1px solid #ddd;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Key Performance Section */
+        .key-performance {
+            margin-top: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .settings-icon {
+            cursor: pointer;
+            color: #666;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .performance-card {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .performance-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .performance-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .performance-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .performance-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .sidebar-icon {
+            font-size: 20px;
+        }
+
+        .resource-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-item:hover {
+            color: #2e7d32;
+            padding-left: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .performance-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .content-left {
+                padding: 20px;
+            }
+
+            .performance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .iframe-container {
+                height: 400px;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            .dashboard-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <span>EcoTrek Systems</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#reports">Reports</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <div class="user-actions">
+                <button>📄 Coonnos</button>
+                <button>👤</button>
+                <button>⚙️</button>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-left">
+            <!-- Home Section -->
+            <div id="home" class="page-section active">
+                <h1 class="page-title">Sustainable Waste Management Overview</h1>
+                <p class="page-description">
+                    The Waste Management Dashboard is a data analytics-based system designed to help municipalities monitor and improve waste collection and recycling efficiency. The dashboard visualizes key metrics such as diversion rates, route coverage, and recycling performance using interactive charts and filters. By analyzing data from multiple sources, it provides insights that support better decision-making, optimize resource allocation, and promote environmental sustainability.
+                </p>
+
+                <!-- Dashboard Section -->
+                <div class="dashboard-section">
+                    <div class="dashboard-header">
+                        <h2 class="dashboard-title">Waste Management System Dashboard</h2>
+                        <div class="dashboard-controls">
+                            <button class="control-btn">📊</button>
+                            <button class="control-btn">⚙️</button>
+                        </div>
+                    </div>
+                    <div class="iframe-container">
+                        <iframe src="https://eu2.ca.analytics.ibm.com/bi/?perspective=dashboard&amp;pathRef=.my_folders%2FDABI%2Bdashboard&amp;closeWindowOnLastView=true&amp;ui_appbar=false&amp;ui_navbar=false&amp;shareMode=embedded&amp;action=view&amp;mode=dashboard&amp;subView=model00000199cc49ce04_00000000&amp;nav_filter=true" width="320" height="200" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+
+                <!-- Key Performance Section -->
+                <div class="key-performance">
+                    <div class="section-header">
+                        <h2 class="section-title">Key Performancees Explained</h2>
+                        <span class="settings-icon">⚙️</span>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-card">
+                            <div class="performance-icon">📊</div>
+                            <div class="performance-label">Attainrate</div>
+                            <div class="performance-value">85%</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">📈</div>
+                            <div class="performance-label">Mål-danmark</div>
+                            <div class="performance-value">92%</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">♻️</div>
+                            <div class="performance-label">Genanvendt</div>
+                            <div class="performance-value">78%</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">🎯</div>
+                            <div class="performance-label">Såfrernet</div>
+                            <div class="performance-value">88%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics" class="page-section">
+                <h1 class="page-title">Analytics Dashboard</h1>
+                <p class="page-description">
+                    Comprehensive analytics tools to track waste management performance across all districts and zones. Monitor trends, identify patterns, and make data-driven decisions to optimize your waste management operations.
+                </p>
+                <div class="dashboard-section">
+                    <div class="dashboard-header">
+                        <h2 class="dashboard-title">Advanced Analytics</h2>
+                        <div class="dashboard-controls">
+                            <button class="control-btn">📊</button>
+                            <button class="control-btn">⚙️</button>
+                        </div>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-card">
+                            <div class="performance-icon">📈</div>
+                            <div class="performance-label">Trend Analysis</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">🗺️</div>
+                            <div class="performance-label">Geographic Data</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">📊</div>
+                            <div class="performance-label">Performance Metrics</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">🔍</div>
+                            <div class="performance-label">Deep Insights</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="page-section">
+                <h1 class="page-title">Reports & Documentation</h1>
+                <p class="page-description">
+                    Generate comprehensive reports for stakeholders, export data for further analysis, and access historical documentation. All reports can be customized based on date ranges, districts, and specific metrics.
+                </p>
+                <div class="dashboard-section">
+                    <div class="dashboard-header">
+                        <h2 class="dashboard-title">Available Reports</h2>
+                        <div class="dashboard-controls">
+                            <button class="control-btn">📄</button>
+                            <button class="control-btn">⚙️</button>
+                        </div>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-card">
+                            <div class="performance-icon">📋</div>
+                            <div class="performance-label">Monthly Reports</div>
+                            <div class="performance-value">12</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">📊</div>
+                            <div class="performance-label">Annual Summaries</div>
+                            <div class="performance-value">3</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">📈</div>
+                            <div class="performance-label">Custom Reports</div>
+                            <div class="performance-value">25</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">📁</div>
+                            <div class="performance-label">Archives</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div id="support" class="page-section">
+                <h1 class="page-title">Support & Resources</h1>
+                <p class="page-description">
+                    Access technical support, training materials, documentation, and community resources. Our support team is available to help you get the most out of the Waste Management Dashboard.
+                </p>
+                <div class="dashboard-section">
+                    <div class="dashboard-header">
+                        <h2 class="dashboard-title">Support Resources</h2>
+                        <div class="dashboard-controls">
+                            <button class="control-btn">💬</button>
+                            <button class="control-btn">⚙️</button>
+                        </div>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-card">
+                            <div class="performance-icon">📖</div>
+                            <div class="performance-label">Documentation</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">🎓</div>
+                            <div class="performance-label">Training</div>
+                            <div class="performance-value">Start</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">💬</div>
+                            <div class="performance-label">Contact Support</div>
+                            <div class="performance-value">Email</div>
+                        </div>
+                        <div class="performance-card">
+                            <div class="performance-icon">❓</div>
+                            <div class="performance-label">FAQ</div>
+                            <div class="performance-value">View</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Key Performance Section -->
+            <div class="key-performance">
+                <div class="section-header">
+                    <h2 class="section-title">Key Performancees Explained</h2>
+                    <span class="settings-icon">⚙️</span>
+                </div>
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <div class="performance-icon">📊</div>
+                        <div class="performance-label">Attainrate</div>
+                        <div class="performance-value">85%</div>
+                    </div>
+                    <div class="performance-card">
+                        <div class="performance-icon">📈</div>
+                        <div class="performance-label">Mål-danmark</div>
+                        <div class="performance-value">92%</div>
+                    </div>
+                    <div class="performance-card">
+                        <div class="performance-icon">♻️</div>
+                        <div class="performance-label">Genanvendt</div>
+                        <div class="performance-value">78%</div>
+                    </div>
+                    <div class="performance-card">
+                        <div class="performance-icon">🎯</div>
+                        <div class="performance-label">Såfrernet</div>
+                        <div class="performance-value">88%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span class="sidebar-icon">📊</span>
+                    <span>Analytic Traits</span>
+                </div>
+                <div class="resource-item">Diversion Rate Analysis</div>
+                <div class="resource-item">Route Optimization</div>
+                <div class="resource-item">Performance Metrics</div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span class="sidebar-icon">🗂️</span>
+                    <span>Påggnded</span>
+                </div>
+                <div class="resource-item">District Reports</div>
+                <div class="resource-item">Monthly Summaries</div>
+                <div class="resource-item">Yearly Trends</div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span class="sidebar-icon">📄</span>
+                    <span>Related Resources</span>
+                </div>
+                <div class="resource-item">Best Practices Guide</div>
+                <div class="resource-item">Technical Documentation</div>
+                <div class="resource-item">Training Materials</div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span class="sidebar-icon">📋</span>
+                    <span>Lillis Inarmlis</span>
+                </div>
+                <div class="resource-item">System Updates</div>
+                <div class="resource-item">Maintenance Schedule</div>
+                <div class="resource-item">Support Contacts</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const sections = document.querySelectorAll('.page-section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Hide all sections
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Show the target section
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>
