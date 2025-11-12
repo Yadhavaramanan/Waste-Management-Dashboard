@@ -27,12 +27,6 @@ It integrates **IBM Cognos Analytics** for real-time data visualization and offe
 
 ---
 
-## 🎬 Demo
-
-🔗 [Live Demo]([https://yourusername.github.io/ecotrek-dashboard](https://github.com/Yadhavaramanan/Waste-Management-Dashboard))  
-
----
-
 ## 📸 Screenshots
 
 ### 🏠 Home Page
