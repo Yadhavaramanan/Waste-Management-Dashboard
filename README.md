@@ -37,13 +37,13 @@ It integrates **IBM Cognos Analytics** for real-time data visualization and offe
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](screenshots/home.png)
+![Home Page](Home.png)
 
 ### 📊 Analytics Dashboard
-![Analytics](screenshots/analytics.png)
+![Analytics](screenshots/Analytics.png)
 
 ### 📈 Reports Section
-![Reports](screenshots/reports.png)
+![Reports](screenshots/Reports.png)
 
 ---
 
